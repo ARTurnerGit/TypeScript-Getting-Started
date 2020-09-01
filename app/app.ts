@@ -1,13 +1,32 @@
 function startGame() {
-  let playerName: string = "Audrey Hepburn";
+  let playerName: string | undefined = getInputValue("playername");
   logPlayer(playerName);
 
-  let messagesElement = document.getElementById("messages");
-  messagesElement!.innerText = "Welcome to MultiMath! Starting new game...";
+  postScore(200, playerName);
 }
 
-function logPlayer(name) {
+function logPlayer(name: string = "MultiMath player"): void {
   console.log(`New game starting for player: ${name}`);
+}
+
+function getInputValue(elementID: string): string | undefined {
+  const inputElement: HTMLInputElement = <HTMLInputElement>(
+    document.getElementById(elementID)
+  );
+
+  if (inputElement.value === "") return undefined;
+  return inputElement.value;
+}
+
+function postScore(
+  score: number,
+  playerName: string = "MultiMath Player"
+): void {
+  const scoreElement: HTMLElement | null = document.getElementById(
+    "postedScores"
+  );
+  // ....! is the ts non-null assertion operator
+  scoreElement!.innerText = `${score} - ${playerName}`;
 }
 
 document.getElementById("startGame")!.addEventListener("click", startGame);
