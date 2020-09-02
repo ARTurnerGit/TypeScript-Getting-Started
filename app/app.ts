@@ -1,3 +1,5 @@
+/// <reference path="player.ts" />
+
 function startGame() {
   let playerName: string | undefined = getInputValue("playername");
   logPlayer(playerName);
@@ -41,3 +43,7 @@ function logMessage(message: string): void {
 }
 
 document.getElementById("startGame")!.addEventListener("click", startGame);
+
+let firstPlayer: Player = new Player();
+firstPlayer.name = "Tony Soprano";
+console.log(firstPlayer.formatName());
